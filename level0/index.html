@@ -5,31 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level 0 - Protocol</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #0d0d0d; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Segoe UI', sans-serif; }
-        .flashing-dot { width: 45px; height: 45px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
-            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
-            100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
-        }
-        #secret-target { position: absolute; width: 80px; height: 80px; background-color: #333333; border-radius: 4px; cursor: default; }
-        .tutorial-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 100; transition: opacity 0.5s ease; }
-        .tutorial-box { background: #141414; border: 1px solid #333; padding: 30px; border-radius: 8px; text-align: center; max-width: 400px; }
-        .tutorial-box h2 { color: #ff0000; margin-top: 0; }
-        .tutorial-box p { color: #aaa; line-height: 1.5; margin-bottom: 25px; }
-        .start-btn { background: #ff0000; border: none; color: white; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
+        body { margin: 0; padding: 0; background-color: #0a0a0c; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Consolas', 'Courier New', monospace; }
+        
+        /* High-Tech Status Top Bar */
+        .status-bar { position: absolute; top: 0; left: 0; width: 100%; background: #111116; border-bottom: 2px solid #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); padding: 12px 20px; display: flex; justify-content: space-between; box-sizing: border-box; z-index: 10; color: #00f0ff; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; }
+        .progress-container { display: flex; align-items: center; gap: 5px; }
+        .node { width: 12px; height: 12px; border: 1px solid #333; background: #222; border-radius: 2px; }
+        .node.active { background: #00f0ff; box-shadow: 0 0 8px #00f0ff; border-color: #00f0ff; }
+
+        .flashing-dot { width: 45px; height: 45px; background-color: #ff0055; border-radius: 50%; box-shadow: 0 0 25px #ff0055; animation: pulse 1.2s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        /* Level 0 Target: Easily visible blue-gray box */
+        #secret-target { position: absolute; width: 80px; height: 80px; background-color: #22323a; border-radius: 6px; cursor: default; border: 1px solid rgba(0, 240, 255, 0.1); }
+
+        /* Modern Tutorial Overlay Screen */
+        .tutorial-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.9); display: flex; justify-content: center; align-items: center; z-index: 100; transition: opacity 0.5s ease; }
+        .tutorial-box { background: #111116; border: 2px solid #00f0ff; padding: 35px; border-radius: 8px; text-align: center; max-width: 420px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.2); }
+        .tutorial-box h2 { color: #00f0ff; margin-top: 0; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+        .tutorial-box p { color: #8a99ad; line-height: 1.6; margin-bottom: 25px; }
+        .start-btn { background: #00f0ff; border: none; color: #0a0a0c; padding: 12px 30px; font-weight: bold; font-size: 1rem; border-radius: 4px; cursor: pointer; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); transition: all 0.2s; }
+        .start-btn:hover { background: #fff; box-shadow: 0 0 25px #00f0ff; }
     </style>
 </head>
 <body>
-    <div class="tutorial-overlay" id="tutorial">
-        <div class="tutorial-box">
-            <h2>HOW TO PLAY</h2>
-            <p>Find the <strong>faintly discolored square</strong> hidden randomly on your screen and click it to turn off the terminal light. <br><br>Each level gets significantly smaller and harder to see!</p>
-            <button class="start-btn" onclick="closeTutorial()">Start Mission</button>
+
+    <div class="status-bar">
+        <span>BURGER_TERMINAL // SECURITY_CORE</span>
+        <div class="progress-container">
+            <span>PROGRESS: </span>
+            <div class="node active"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
         </div>
     </div>
+
+    <div class="tutorial-overlay" id="tutorial">
+        <div class="tutorial-box">
+            <h2>INITIALIZING OVERRIDE</h2>
+            <p>Welcome operator. To bypass this core firewall, look closely around the dark zone to find the <strong>faintly visible square</strong>. Click it to shut down the pulsing node and move to the next sector.</p>
+            <button class="start-btn" onclick="closeTutorial()">Begin Hack</button>
+        </div>
+    </div>
+
     <div class="flashing-dot"></div>
     <div id="secret-target"></div>
+
     <script>
         function closeTutorial() {
             document.getElementById('tutorial').style.opacity = '0';
@@ -37,7 +60,7 @@
         }
         window.onload = function() {
             const target = document.getElementById('secret-target');
-            target.style.top = (Math.floor(Math.random() * 70) + 15) + '%';
+            target.style.top = (Math.floor(Math.random() * 65) + 18) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
             target.addEventListener('click', function() { window.location.href = '../level1/'; });
         };
