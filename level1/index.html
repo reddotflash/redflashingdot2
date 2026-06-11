@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1 - Detection</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #111; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+        .flashing-dot { width: 40px; height: 40px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
+            100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+        }
+        /* Level 1 Setup: Smaller and significantly darker */
+        #secret-target { position: absolute; width: 50px; height: 50px; background-color: #181818; cursor: default; }
+    </style>
+</head>
+<body>
+    <div class="flashing-dot"></div>
+    <div id="secret-target"></div>
+    <script>
+        window.onload = function() {
+            const target = document.getElementById('secret-target');
+            const randomTop = Math.floor(Math.random() * 80) + 10;
+            const randomLeft = Math.floor(Math.random() * 80) + 10;
+            target.style.top = randomTop + '%';
+            target.style.left = randomLeft + '%';
+
+            target.addEventListener('click', function() {
+                // Instantly routes them to the Level 2 folder
+                window.location.href = '../level2/';
+            });
+        };
+    </script>
+</body>
+</html>
