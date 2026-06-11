@@ -1,87 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger Client - The Challenge</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            transition: background-color 0.5s ease;
-        }
-
-        /* The flashing red dot */
-        .flashing-dot {
-            width: 40px;
-            height: 40px;
-            background-color: #ff0000;
-            border-radius: 50%;
-            box-shadow: 0 0 25px #ff0000;
-            animation: pulse 1.2s infinite ease-in-out;
-            transition: opacity 0.5s ease;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
-            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
-            100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
-        }
-
-        /* The Secret Slightly Discolored Target */
-        #secret-target {
-            position: absolute;
-            width: 60px; 
-            height: 60px;
-            /* Faintly lighter than the #111 background so it's a subtle ghost square */
-            background-color: #151515; 
-            cursor: default; 
-            transition: opacity 0.3s ease;
-        }
-
-        /* Completely kills the red light when they win */
-        .turned-off {
-            opacity: 0 !important;
-            box-shadow: none !important;
-            animation: none !important;
-        }
-    </style>
+    <meta http-serif="refresh" content="0; url=./level0/">
+    <script>
+        window.location.replace("./level0/");
+    </script>
 </head>
 <body>
-
-    <!-- The Dot -->
-    <div class="flashing-dot" id="dot"></div>
-
-    <!-- The Hidden Hitbox -->
-    <div id="secret-target"></div>
-
-    <script>
-        window.onload = function() {
-            const target = document.getElementById('secret-target');
-            const dot = document.getElementById('dot');
-
-            // Picks a random percentage position on the screen
-            const randomTop = Math.floor(Math.random() * 80) + 10;
-            const randomLeft = Math.floor(Math.random() * 80) + 10;
-
-            // Apply the random coordinates to our phantom box
-            target.style.top = randomTop + '%';
-            target.style.left = randomLeft + '%';
-
-            // When someone successfully clicks the hidden zone
-            target.addEventListener('click', function() {
-                dot.classList.add('turned-off'); // Hide the dot
-                target.style.display = 'none';   // Completely erase the discolored box
-                document.body.style.backgroundColor = '#000'; // Drop screen to absolute black
-            });
-        };
-    </script>
 </body>
 </html>
