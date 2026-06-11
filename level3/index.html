@@ -6,10 +6,11 @@
     <style>
         body { 
             margin: 0; padding: 0; 
-            /* Vibrant Purple Gradient */
             background: linear-gradient(135deg, #180326 0%, #06030a 100%); 
-            height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Consolas', monospace; 
+            height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; 
+            font-family: 'Consolas', monospace; 
         }
+        
         .status-bar { position: absolute; top: 0; left: 0; width: 100%; background: rgba(15, 10, 20, 0.8); backdrop-filter: blur(5px); border-bottom: 2px solid #bd00ff; box-shadow: 0 0 15px rgba(189, 0, 255, 0.3); padding: 12px 20px; display: flex; justify-content: space-between; box-sizing: border-box; z-index: 10; color: #bd00ff; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; }
         .progress-container { display: flex; align-items: center; gap: 5px; }
         .node { width: 12px; height: 12px; border: 1px solid #333; background: #222; border-radius: 2px; }
@@ -18,8 +19,16 @@
         .flashing-dot { width: 45px; height: 45px; background-color: #ff0055; border-radius: 50%; box-shadow: 0 0 25px #ff0055; animation: pulse 1.2s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* Darker shadow layer that masks the purple glow underneath */
-        #secret-target { position: absolute; width: 30px; height: 30px; background-color: rgba(0, 0, 0, 0.35); border-radius: 4px; cursor: default; }
+        /* Unified Style: Harder to see, smaller tint box + neon purple border */
+        #secret-target { 
+            position: absolute; 
+            width: 30px; 
+            height: 30px; 
+            background-color: rgba(255, 255, 255, 0.02); 
+            border-radius: 4px; 
+            cursor: default; 
+            border: 1px solid rgba(189, 0, 255, 0.15); 
+        }
     </style>
 </head>
 <body>
@@ -27,17 +36,27 @@
         <span>BURGER_TERMINAL // SECURITY_CORE</span>
         <div class="progress-container">
             <span>PROGRESS: </span>
-            <div class="node active"></div><div class="node active"></div><div class="node active"></div><div class="node active"></div><div class="node"></div>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node"></div>
         </div>
     </div>
+    
     <div class="flashing-dot"></div>
     <div id="secret-target"></div>
+    
     <script>
         window.onload = function() {
             const target = document.getElementById('secret-target');
             target.style.top = (Math.floor(Math.random() * 60) + 20) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
-            target.addEventListener('click', function() { window.location.href = '../level4/'; });
+            
+            // Routes smoothly forward to Level 4
+            target.addEventListener('click', function() { 
+                window.location.href = '../level4/'; 
+            });
         };
     </script>
 </body>
