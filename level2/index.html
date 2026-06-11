@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 - The Impossible Dot</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #111; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: sans-serif; }
+        .flashing-dot { width: 40px; height: 40px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; transition: opacity 0.5s ease; }
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
+            100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+        }
+        /* Level 2 Setup: Tiny, hyper-dark phantom square */
+        #secret-target { position: absolute; width: 30px; height: 30px; background-color: #121212; cursor: default; }
+        
+        #victory-screen { display: none; color: #fff; text-align: center; }
+        h1 { color: #ffaa00; font-size: 3rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="flashing-dot" id="dot"></div>
+    <div id="secret-target"></div>
+
+    <!-- Victory message shown only upon completion -->
+    <div id="victory-screen">
+        <h1>VICTORY</h1>
+        <p>You successfully shut down the Burger Client terminal.</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const target = document.getElementById('secret-target');
+            const dot = document.getElementById('dot');
+            const victory = document.getElementById('victory-screen');
+
+            const randomTop = Math.floor(Math.random() * 80) + 10;
+            const randomLeft = Math.floor(Math.random() * 80) + 10;
+            target.style.top = randomTop + '%';
+            target.style.left = randomLeft + '%';
+
+            target.addEventListener('click', function() {
+                dot.style.display = 'none';
+                target.style.display = 'none';
+                document.body.style.backgroundColor = '#050505';
+                victory.style.display = 'block';
+            });
+        };
+    </script>
+</body>
+</html>
