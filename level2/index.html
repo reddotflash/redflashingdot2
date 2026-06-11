@@ -18,6 +18,7 @@
             const target = document.getElementById('secret-target');
             target.style.top = (Math.floor(Math.random() * 70) + 15) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
+            // THIS LINE SENDS THEM TO LEVEL 3:
             target.addEventListener('click', function() { window.location.href = '../level3/'; });
         };
     </script>
