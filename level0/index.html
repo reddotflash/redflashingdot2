@@ -3,32 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 0 - Introduction</title>
+    <title>Level 0 - Protocol</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #111; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
-        .flashing-dot { width: 40px; height: 40px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
+        body { margin: 0; padding: 0; background-color: #0d0d0d; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Segoe UI', sans-serif; }
+        
+        .flashing-dot { width: 45px; height: 45px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
         @keyframes pulse {
             0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
             50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
             100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
         }
-        /* Level 0 Setup: Big and quite easy to see */
-        #secret-target { position: absolute; width: 70px; height: 70px; background-color: #252525; cursor: default; }
+
+        /* The Secret Target (Level 0: Fairly visible gray box) */
+        #secret-target { position: absolute; width: 75px; height: 75px; background-color: #2a2a2a; border-radius: 4px; cursor: default; transition: background 0.2s; }
+        #secret-target:active { background-color: #3a3a3a; }
+
+        /* Modern Tutorial Overlay Screen */
+        .tutorial-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85);
+            display: flex; justify-content: center; align-items: center; z-index: 100; transition: opacity 0.5s ease;
+        }
+        .tutorial-box {
+            background: #141414; border: 1px solid #333; padding: 30px; border-radius: 8px; text-align: center; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .tutorial-box h2 { color: #ff0000; margin-top: 0; letter-spacing: 1px; }
+        .tutorial-box p { color: #aaa; line-height: 1.5; margin-bottom: 25px; }
+        .start-btn { background: #ff0000; border: none; color: white; padding: 10px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; transition: background 0.2s; }
+        .start-btn:hover { background: #cc0000; }
     </style>
 </head>
 <body>
+
+    <div class="tutorial-overlay" id="tutorial">
+        <div class="tutorial-box">
+            <h2>LEVEL 0: TUTORIAL</h2>
+            <p>The system core is locked. To shut down the red light, locate the <strong>faintly discolored gray square</strong> hidden somewhere on the screen and click it. <br><br>As you progress, the box will get smaller and blend into the dark.</p>
+            <button class="start-btn" onclick="closeTutorial()">Start Mission</button>
+        </div>
+    </div>
+
     <div class="flashing-dot"></div>
     <div id="secret-target"></div>
+
     <script>
+        function closeTutorial() {
+            document.getElementById('tutorial').style.opacity = '0';
+            setTimeout(() => document.getElementById('tutorial').style.display = 'none', 500);
+        }
+
         window.onload = function() {
             const target = document.getElementById('secret-target');
-            const randomTop = Math.floor(Math.random() * 80) + 10;
-            const randomLeft = Math.floor(Math.random() * 80) + 10;
+            const randomTop = Math.floor(Math.random() * 75) + 15;
+            const randomLeft = Math.floor(Math.random() * 75) + 15;
             target.style.top = randomTop + '%';
             target.style.left = randomLeft + '%';
 
             target.addEventListener('click', function() {
-                // Instantly routes them to the Level 1 folder
                 window.location.href = '../level1/';
             });
         };
