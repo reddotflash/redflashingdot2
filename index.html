@@ -35,16 +35,18 @@
             100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
         }
 
-        /* The Secret Invisible Clickable Target */
+        /* The Secret Slightly Discolored Target */
         #secret-target {
             position: absolute;
-            width: 60px; /* Size of the invisible clicking box */
+            width: 60px; 
             height: 60px;
-            background: transparent;
-            cursor: default; /* CRUCIAL: Prevents the mouse cursor from changing to a hand! */
+            /* Faintly lighter than the #111 background so it's a subtle ghost square */
+            background-color: #151515; 
+            cursor: default; 
+            transition: opacity 0.3s ease;
         }
 
-        /* This class completely kills the red light when they win */
+        /* Completely kills the red light when they win */
         .turned-off {
             opacity: 0 !important;
             box-shadow: none !important;
@@ -65,18 +67,19 @@
             const target = document.getElementById('secret-target');
             const dot = document.getElementById('dot');
 
-            // Picks a random percentage position on the screen (keeps it away from extreme edges)
+            // Picks a random percentage position on the screen
             const randomTop = Math.floor(Math.random() * 80) + 10;
             const randomLeft = Math.floor(Math.random() * 80) + 10;
 
-            // Apply the random coordinates to our invisible box
+            // Apply the random coordinates to our phantom box
             target.style.top = randomTop + '%';
             target.style.left = randomLeft + '%';
 
-            // When someone successfully clicks the random hidden zone
+            // When someone successfully clicks the hidden zone
             target.addEventListener('click', function() {
-                dot.classList.add('turned-off'); // Erase the dot
-                document.body.style.backgroundColor = '#000'; // Make background pitch black
+                dot.classList.add('turned-off'); // Hide the dot
+                target.style.display = 'none';   // Completely erase the discolored box
+                document.body.style.backgroundColor = '#000'; // Drop screen to absolute black
             });
         };
     </script>
