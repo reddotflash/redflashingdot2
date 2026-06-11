@@ -2,37 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Level 2 - Advanced Firewall</title>
+    <title>Level 2 - Sector 3</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #0d0d0d; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+        body { margin: 0; padding: 0; background-color: #0a0a0c; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Consolas', monospace; }
+        .status-bar { position: absolute; top: 0; left: 0; width: 100%; background: #111116; border-bottom: 2px solid #ffb700; box-shadow: 0 0 15px rgba(255, 183, 0, 0.2); padding: 12px 20px; display: flex; justify-content: space-between; box-sizing: border-box; z-index: 10; color: #ffb700; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; }
+        .progress-container { display: flex; align-items: center; gap: 5px; }
+        .node { width: 12px; height: 12px; border: 1px solid #333; background: #222; border-radius: 2px; }
+        .node.active { background: #ffb700; box-shadow: 0 0 8px #ffb700; border-color: #ffb700; }
         
-        .flashing-dot { width: 45px; height: 45px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
-            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
-        }
+        .flashing-dot { width: 45px; height: 45px; background-color: #ff0055; border-radius: 50%; box-shadow: 0 0 25px #ff0055; animation: pulse 1.2s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* Level 2 Target: Medium-hard difficulty */
-        #secret-target { position: absolute; width: 45px; height: 45px; background-color: #1a1a1a; border-radius: 4px; cursor: default; }
+        /* Level 2 Target: Blends heavily */
+        #secret-target { position: absolute; width: 45px; height: 45px; background-color: #1a1710; border-radius: 4px; cursor: default; }
     </style>
 </head>
 <body>
-
+    <div class="status-bar">
+        <span>BURGER_TERMINAL // SECURITY_CORE</span>
+        <div class="progress-container">
+            <span>PROGRESS: </span>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+        </div>
+    </div>
     <div class="flashing-dot"></div>
     <div id="secret-target"></div>
-
     <script>
         window.onload = function() {
             const target = document.getElementById('secret-target');
-
-            // Set random position
-            target.style.top = (Math.floor(Math.random() * 70) + 15) + '%';
+            target.style.top = (Math.floor(Math.random() * 65) + 18) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
-
-            // CRUCIAL: This now sends them forward to Level 3 instead of winning!
-            target.addEventListener('click', function() {
-                window.location.href = '../level3/';
-            });
+            target.addEventListener('click', function() { window.location.href = '../level3/'; });
         };
     </script>
 </body>
