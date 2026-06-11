@@ -2,21 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Level 1</title>
+    <title>Level 1 - Sector 2</title>
     <style>
-        body { margin: 0; padding: 0; background-color: #0d0d0d; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
-        .flashing-dot { width: 45px; height: 45px; background-color: #ff0000; border-radius: 50%; box-shadow: 0 0 25px #ff0000; animation: pulse 1.2s infinite ease-in-out; }
+        body { margin: 0; padding: 0; background-color: #0a0a0c; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; font-family: 'Consolas', monospace; }
+        .status-bar { position: absolute; top: 0; left: 0; width: 100%; background: #111116; border-bottom: 2px solid #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.2); padding: 12px 20px; display: flex; justify-content: space-between; box-sizing: border-box; z-index: 10; color: #39ff14; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; }
+        .progress-container { display: flex; align-items: center; gap: 5px; }
+        .node { width: 12px; height: 12px; border: 1px solid #333; background: #222; border-radius: 2px; }
+        .node.active { background: #39ff14; box-shadow: 0 0 8px #39ff14; border-color: #39ff14; }
+        
+        .flashing-dot { width: 45px; height: 45px; background-color: #ff0055; border-radius: 50%; box-shadow: 0 0 25px #ff0055; animation: pulse 1.2s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 1; } }
-        #secret-target { position: absolute; width: 60px; height: 60px; background-color: #222222; border-radius: 4px; cursor: default; }
+
+        /* Level 1 Target: Fainter, dark green-ish tint */
+        #secret-target { position: absolute; width: 60px; height: 60px; background-color: #142217; border-radius: 50%; cursor: default; }
     </style>
 </head>
 <body>
+    <div class="status-bar">
+        <span>BURGER_TERMINAL // SECURITY_CORE</span>
+        <div class="progress-container">
+            <span>PROGRESS: </span>
+            <div class="node active"></div>
+            <div class="node active"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+        </div>
+    </div>
     <div class="flashing-dot"></div>
     <div id="secret-target"></div>
     <script>
         window.onload = function() {
             const target = document.getElementById('secret-target');
-            target.style.top = (Math.floor(Math.random() * 70) + 15) + '%';
+            target.style.top = (Math.floor(Math.random() * 65) + 18) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
             target.addEventListener('click', function() { window.location.href = '../level2/'; });
         };
