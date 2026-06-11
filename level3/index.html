@@ -19,15 +19,16 @@
         .flashing-dot { width: 45px; height: 45px; background-color: #ff0055; border-radius: 50%; box-shadow: 0 0 25px #ff0055; animation: pulse 1.2s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* Unified Style: Harder to see, smaller tint box + neon purple border */
+        /* UPGRADED: Invisible click-mesh background + custom layered border */
         #secret-target { 
             position: absolute; 
             width: 30px; 
             height: 30px; 
-            background-color: rgba(255, 255, 255, 0.02); 
+            background-color: rgba(255, 255, 255, 0.01); 
             border-radius: 4px; 
             cursor: default; 
-            border: 1px solid rgba(189, 0, 255, 0.15); 
+            border: 1px solid rgba(210, 50, 255, 0.35); 
+            z-index: 5; 
         }
     </style>
 </head>
@@ -36,11 +37,7 @@
         <span>BURGER_TERMINAL // SECURITY_CORE</span>
         <div class="progress-container">
             <span>PROGRESS: </span>
-            <div class="node active"></div>
-            <div class="node active"></div>
-            <div class="node active"></div>
-            <div class="node active"></div>
-            <div class="node"></div>
+            <div class="node active"></div><div class="node active"></div><div class="node active"></div><div class="node active"></div><div class="node"></div>
         </div>
     </div>
     
@@ -53,7 +50,6 @@
             target.style.top = (Math.floor(Math.random() * 60) + 20) + '%';
             target.style.left = (Math.floor(Math.random() * 70) + 15) + '%';
             
-            // Routes smoothly forward to Level 4
             target.addEventListener('click', function() { 
                 window.location.href = '../level4/'; 
             });
