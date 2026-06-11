@@ -3,14 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Site</title>
+    <title>Burger Client - The Challenge</title>
     <style>
-        body { font-family: sans-serif; background: #222; color: #fff; text-align: center; padding: 50px; }
-        h1 { color: #ffaa00; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.5s ease;
+        }
+
+        /* The flashing red dot */
+        .flashing-dot {
+            width: 40px;
+            height: 40px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            box-shadow: 0 0 25px #ff0000;
+            animation: pulse 1.2s infinite ease-in-out;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+            50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 30px #ff0000; }
+            100% { transform: scale(0.9); opacity: 0.3; box-shadow: 0 0 10px #ff0000; }
+        }
+
+        /* The Secret Invisible Clickable Target */
+        #secret-target {
+            position: absolute;
+            width: 60px; /* Size of the invisible clicking box */
+            height: 60px;
+            background: transparent;
+            cursor: default; /* CRUCIAL: Prevents the mouse cursor from changing to a hand! */
+        }
+
+        /* This class completely kills the red light when they win */
+        .turned-off {
+            opacity: 0 !important;
+            box-shadow: none !important;
+            animation: none !important;
+        }
     </style>
 </head>
 <body>
-    <h1>Burger Client Landing Page</h1>
-    <p>Welcome to the official home of my custom client!</p>
+
+    <!-- The Dot -->
+    <div class="flashing-dot" id="dot"></div>
+
+    <!-- The Hidden Hitbox -->
+    <div id="secret-target"></div>
+
+    <script>
+        window.onload = function() {
+            const target = document.getElementById('secret-target');
+            const dot = document.getElementById('dot');
+
+            // Picks a random percentage position on the screen (keeps it away from extreme edges)
+            const randomTop = Math.floor(Math.random() * 80) + 10;
+            const randomLeft = Math.floor(Math.random() * 80) + 10;
+
+            // Apply the random coordinates to our invisible box
+            target.style.top = randomTop + '%';
+            target.style.left = randomLeft + '%';
+
+            // When someone successfully clicks the random hidden zone
+            target.addEventListener('click', function() {
+                dot.classList.add('turned-off'); // Erase the dot
+                document.body.style.backgroundColor = '#000'; // Make background pitch black
+            });
+        };
+    </script>
 </body>
 </html>
